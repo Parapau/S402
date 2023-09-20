@@ -5,33 +5,32 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+
 @Entity
-@Table
+@Table //(name = "FRUITA")
 public class Fruita {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@SequenceGenerator(name="generadorFruita", sequenceName = "id", allocationSize=1)
 	private long id;
 	
-	@Column
+	@Column(name = "NOM")
 	private String nom;
 	
-	@Column
-	private int preu;
-	
-	@Column
-	private int pes;
+	@Column(name = "QUANTITATQUILOS")
+	private int quantitatQuilos;
 	
 	
 	public Fruita() {}
 	
-	public Fruita(String nom, int preu, int pes) {
+	public Fruita(String nom, int quantitatQuilos) {
 		//this.id = id;
 		this.nom = nom;
-		this.preu = preu;
-		this.pes = pes;
+		this.quantitatQuilos = quantitatQuilos;
 	}
 
 	
@@ -44,13 +43,8 @@ public class Fruita {
 	}
 
 
-	public int getPreu() {
-		return preu;
-	}
-
-
-	public int getPes() {
-		return pes;
+	public int getQuantitatQuilos() {
+		return quantitatQuilos;
 	}
 
 	
@@ -59,19 +53,15 @@ public class Fruita {
 	}
 
 
-	public void setPreu(int preu) {
-		this.preu = preu;
-	}
 
-
-	public void setPes(int pes) {
-		this.pes = pes;
+	public void setQuantitatQuilos(int quantitatQuilos) {
+		this.quantitatQuilos = quantitatQuilos;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "Id: " + this.getId() + "\nNom: " + this.getNom() + "\nPreu: " + this.getPreu() + "\nPes: " + this.getPes() + "kg\n\n";
+		return "Id: " + this.getId() + "\nNom: " + this.getNom() + "\nPes: " + this.getQuantitatQuilos() + "kg\n\n";
 	}
 	
 }

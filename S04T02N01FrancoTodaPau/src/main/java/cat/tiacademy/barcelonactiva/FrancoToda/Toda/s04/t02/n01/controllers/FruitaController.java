@@ -42,27 +42,21 @@ public class FruitaController {
 	}
 	
 	@PostMapping("/Add")//Hauria de ser @RequestBody crec pero...
-	public ResponseEntity<String> fruitaAdd /*(@RequestBody Fruita fruita) {*/(@RequestParam String fruitaNom, @RequestParam int fruitaPreu, @RequestParam int fruitaPes) {
-		ResponseEntity<String> resultat;
+	public ResponseEntity<Fruita> fruitaAdd /*(@RequestBody Fruita fruita) {*/(@RequestParam String fruitaNom, @RequestParam int fruitaPes) {
+		ResponseEntity<Fruita> resultat;
 		
-		Fruita fruita = new Fruita (fruitaNom, fruitaPreu, fruitaPes);
-		
-		//System.out.println(fruita.getNom() + fruita.getPreu() +fruita.getPes());
-		
-		
-		//Fruita fruitaSalvada = fruitaRepository.save(new Fruita (fruita.getNom(), fruita.getPreu(), fruita.getPes()));
+		Fruita fruita = new Fruita (fruitaNom, fruitaPes);
 		
 		Fruita fruitaSalvada = fruitaRepository.save(fruita);
 		
-		resultat = new ResponseEntity(fruitaSalvada, HttpStatus.CREATED);
+		
+		resultat = new ResponseEntity<Fruita>(fruitaSalvada, HttpStatus.CREATED);
 
-		
-		
 		return resultat;
 	}
 	
 	@PutMapping("/Update")
-	public ResponseEntity<Fruita> fruitaUpdate (@RequestParam long id, @RequestParam String fruitaNom, @RequestParam int fruitaPreu, @RequestParam int fruitaPes) {
+	public ResponseEntity<Fruita> fruitaUpdate (@RequestParam long id, @RequestParam String fruitaNom, @RequestParam int fruitaPes) {
 		ResponseEntity<Fruita> resposta = null;
 		Fruita fruita;
 		Optional<Fruita> fruitaVella = fruitaRepository.findById(id);
@@ -70,8 +64,7 @@ public class FruitaController {
 		if (fruitaVella.isPresent()) {
 			fruita = fruitaVella.get();
 			fruita.setNom(fruitaNom);
-			fruita.setPes(fruitaPes);
-			fruita.setPreu(fruitaPreu);
+			fruita.setQuantitatQuilos(fruitaPes);
 			resposta = new ResponseEntity<Fruita>(fruitaRepository.save(fruita), HttpStatus.OK);
 		}
 		
@@ -92,11 +85,9 @@ public class FruitaController {
 	
 	@GetMapping("/GetOne/{id}")
 	public ResponseEntity<Fruita> fruitaGetOne (@PathVariable("id")Long id) {
+		
+		System.err.println("");
 		ResponseEntity<Fruita> resultat;
-		
-		System.out.println("puta");
-		System.out.println(id);
-		
 		
 		Optional<Fruita> fruita = fruitaRepository.findById(id);
 		
