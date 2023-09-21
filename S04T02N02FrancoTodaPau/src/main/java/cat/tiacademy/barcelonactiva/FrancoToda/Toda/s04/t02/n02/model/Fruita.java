@@ -1,4 +1,4 @@
-package cat.tiacademy.barcelonactiva.FrancoToda.Toda.s04.t02.n01.model;
+package cat.tiacademy.barcelonactiva.FrancoToda.Toda.s04.t02.n02.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
